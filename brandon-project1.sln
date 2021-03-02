@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project1.Data", "Project1.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project1.WebUI", "Project1.WebUI\Project1.WebUI.csproj", "{4C2513EF-507B-4B04-B732-67B19507E1C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project1.Test", "Project1.Test\Project1.Test.csproj", "{47EDA6DC-E7E9-4977-9A63-8CB5EC8766DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,5 +60,17 @@ Global
 		{4C2513EF-507B-4B04-B732-67B19507E1C9}.Release|x64.Build.0 = Release|Any CPU
 		{4C2513EF-507B-4B04-B732-67B19507E1C9}.Release|x86.ActiveCfg = Release|Any CPU
 		{4C2513EF-507B-4B04-B732-67B19507E1C9}.Release|x86.Build.0 = Release|Any CPU
+		{47EDA6DC-E7E9-4977-9A63-8CB5EC8766DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47EDA6DC-E7E9-4977-9A63-8CB5EC8766DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47EDA6DC-E7E9-4977-9A63-8CB5EC8766DB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{47EDA6DC-E7E9-4977-9A63-8CB5EC8766DB}.Debug|x64.Build.0 = Debug|Any CPU
+		{47EDA6DC-E7E9-4977-9A63-8CB5EC8766DB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{47EDA6DC-E7E9-4977-9A63-8CB5EC8766DB}.Debug|x86.Build.0 = Debug|Any CPU
+		{47EDA6DC-E7E9-4977-9A63-8CB5EC8766DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47EDA6DC-E7E9-4977-9A63-8CB5EC8766DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47EDA6DC-E7E9-4977-9A63-8CB5EC8766DB}.Release|x64.ActiveCfg = Release|Any CPU
+		{47EDA6DC-E7E9-4977-9A63-8CB5EC8766DB}.Release|x64.Build.0 = Release|Any CPU
+		{47EDA6DC-E7E9-4977-9A63-8CB5EC8766DB}.Release|x86.ActiveCfg = Release|Any CPU
+		{47EDA6DC-E7E9-4977-9A63-8CB5EC8766DB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
