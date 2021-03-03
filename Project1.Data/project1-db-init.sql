@@ -1,6 +1,3 @@
-/*
-Server=tcp:2102-training-brandon-sql.database.windows.net,1433;Initial Catalog=Project0-SQL-DB;Persist Security Info=False;User ID=brandon;Password=SQLdb123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
-*/
 
 
 
