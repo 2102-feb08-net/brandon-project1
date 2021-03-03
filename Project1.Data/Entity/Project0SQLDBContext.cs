@@ -18,7 +18,6 @@ namespace Project1.Data.Entity
         }
 
         public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<Inventory> Inventories { get; set; }
         public virtual DbSet<InventoryLine> InventoryLines { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
@@ -34,10 +33,10 @@ namespace Project1.Data.Entity
             {
                 entity.ToTable("Customer", "Project1");
 
-                entity.HasIndex(e => e.UserId, "UQ__Customer__1788CC4D71F10121")
+                entity.HasIndex(e => e.UserId, "UQ__Customer__1788CC4DF6E8F1A5")
                     .IsUnique();
 
-                entity.HasIndex(e => e.CustomerId, "UQ__Customer__A4AE64D9D82ACC26")
+                entity.HasIndex(e => e.CustomerId, "UQ__Customer__A4AE64D9630CDC16")
                     .IsUnique();
 
                 entity.Property(e => e.Address).HasMaxLength(70);
@@ -71,36 +70,20 @@ namespace Project1.Data.Entity
                     .HasConstraintName("FK_Customer_User");
             });
 
-            modelBuilder.Entity<Inventory>(entity =>
-            {
-                entity.ToTable("Inventory", "Project1");
-
-                entity.HasIndex(e => e.InventoryId, "UQ__Inventor__F5FDE6B2A0572B63")
-                    .IsUnique();
-
-                entity.Property(e => e.LastUpdate).HasColumnType("datetime");
-
-                entity.HasOne(d => d.Location)
-                    .WithMany(p => p.Inventories)
-                    .HasForeignKey(d => d.LocationId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Inventory_Location");
-            });
-
             modelBuilder.Entity<InventoryLine>(entity =>
             {
                 entity.ToTable("InventoryLine", "Project1");
 
-                entity.HasIndex(e => e.InventoryLineId, "UQ__Inventor__BF6B50E081C95711")
+                entity.HasIndex(e => e.InventoryLineId, "UQ__Inventor__BF6B50E0FA7611A1")
                     .IsUnique();
 
                 entity.Property(e => e.LineTotal).HasColumnType("numeric(10, 2)");
 
-                entity.HasOne(d => d.Inventory)
+                entity.HasOne(d => d.Location)
                     .WithMany(p => p.InventoryLines)
-                    .HasForeignKey(d => d.InventoryId)
+                    .HasForeignKey(d => d.LocationId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_InventoryLine_Inventory");
+                    .HasConstraintName("FK_InventoryLine_Location");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.InventoryLines)
@@ -113,7 +96,7 @@ namespace Project1.Data.Entity
             {
                 entity.ToTable("Location", "Project1");
 
-                entity.HasIndex(e => e.LocationId, "UQ__Location__E7FEA49638249B75")
+                entity.HasIndex(e => e.LocationId, "UQ__Location__E7FEA4968EE53F15")
                     .IsUnique();
 
                 entity.Property(e => e.Address).HasMaxLength(70);
@@ -135,7 +118,7 @@ namespace Project1.Data.Entity
             {
                 entity.ToTable("Order", "Project1");
 
-                entity.HasIndex(e => e.OrderId, "UQ__Order__C3905BCE542521F1")
+                entity.HasIndex(e => e.OrderId, "UQ__Order__C3905BCE8049501B")
                     .IsUnique();
 
                 entity.Property(e => e.OrderTime).HasColumnType("datetime");
@@ -159,7 +142,7 @@ namespace Project1.Data.Entity
             {
                 entity.ToTable("OrderLine", "Project1");
 
-                entity.HasIndex(e => e.OrderLineId, "UQ__OrderLin__29068A11E783A72D")
+                entity.HasIndex(e => e.OrderLineId, "UQ__OrderLin__29068A119119F3F3")
                     .IsUnique();
 
                 entity.Property(e => e.LineTotal).HasColumnType("numeric(10, 2)");
@@ -181,7 +164,7 @@ namespace Project1.Data.Entity
             {
                 entity.ToTable("Product", "Project1");
 
-                entity.HasIndex(e => e.ProductId, "UQ__Product__B40CC6CC3992BD6E")
+                entity.HasIndex(e => e.ProductId, "UQ__Product__B40CC6CCF34E4695")
                     .IsUnique();
 
                 entity.Property(e => e.BestBy).HasColumnType("datetime");
@@ -197,10 +180,10 @@ namespace Project1.Data.Entity
             {
                 entity.ToTable("User", "Project1");
 
-                entity.HasIndex(e => e.UserId, "UQ__User__1788CC4DBA050D40")
+                entity.HasIndex(e => e.UserId, "UQ__User__1788CC4D6ADC4EF1")
                     .IsUnique();
 
-                entity.HasIndex(e => e.Username, "UQ__User__536C85E4314DE3DB")
+                entity.HasIndex(e => e.Username, "UQ__User__536C85E4F45CD8B3")
                     .IsUnique();
 
                 entity.Property(e => e.Password)

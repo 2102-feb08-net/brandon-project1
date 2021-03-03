@@ -85,22 +85,14 @@ CREATE TABLE Project1.[OrderLine] (
 
 
 
-CREATE TABLE Project1.[Inventory] (
-    InventoryId INT NOT NULL IDENTITY UNIQUE,
-    LocationId INT NOT NULL,
-    LastUpdate DATETIME NOT NULL,
-    CONSTRAINT PK_Inventory PRIMARY KEY (InventoryId),
-    CONSTRAINT FK_Inventory_Location FOREIGN KEY (LocationId) REFERENCES Project1.[Location]
-)
-
 CREATE TABLE Project1.[InventoryLine] (
     InventoryLineId INT NOT NULL IDENTITY UNIQUE,
-    InventoryId INT NOT NULL,
+    LocationId INT NOT NULL,
     ProductId INT NOT NULL,
     Quantity INT NOT NULL,
     LineTotal NUMERIC(10, 2) NOT NULL,
     CONSTRAINT PK_InventoryLine PRIMARY KEY (InventoryLineId),
-    CONSTRAINT FK_InventoryLine_Inventory FOREIGN KEY (InventoryId) REFERENCES Project1.[Inventory],
+    CONSTRAINT FK_InventoryLine_Location FOREIGN KEY (LocationId) REFERENCES Project1.[Location],
     CONSTRAINT FK_InventoryLine_Product FOREIGN KEY (ProductId) REFERENCES Project1.[Product]
 )
 
@@ -154,12 +146,7 @@ INSERT INTO Project1.[OrderLine] (OrderId, ProductId, Quantity, LineTotal) VALUE
     (4, 6, 1, 3.99),
     (5, 8, 2, 4.98);
 
-INSERT INTO Project1.Inventory (LocationId, LastUpdate) VALUES
-    (1, '2021/2/21'),
-    (2, '2021/2/21'),
-    (3, '2021/2/21');
-
-INSERT INTO Project1.InventoryLine (InventoryId, ProductId, Quantity, LineTotal) VALUES
+INSERT INTO Project1.InventoryLine (LocationId, ProductId, Quantity, LineTotal) VALUES
     (1, 1, 30, 299.70),
     (1, 2, 100, 249.00),
     (1, 3, 15, 749.85),

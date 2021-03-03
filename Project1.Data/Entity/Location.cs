@@ -9,7 +9,7 @@ namespace Project1.Data.Entity
     {
         public Location()
         {
-            Inventories = new HashSet<Inventory>();
+            InventoryLines = new HashSet<InventoryLine>();
             Orders = new HashSet<Order>();
         }
 
@@ -22,7 +22,7 @@ namespace Project1.Data.Entity
         public string PostalCode { get; set; }
         public string Phone { get; set; }
 
-        public virtual ICollection<Inventory> Inventories { get; set; }
+        public virtual ICollection<InventoryLine> InventoryLines { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
     }
 }
