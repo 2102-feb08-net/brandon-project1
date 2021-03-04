@@ -13,7 +13,28 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '5.0.x'
+
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
+
 - script: dotnet test
   displayName: 'dotnet test'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: True
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure subscription 1(11c59c44-5f11-48ed-af2b-630d4fa2affe)'
+    appType: 'webApp'
+    WebAppName: '2102-feb08-net-brandon-project1'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
