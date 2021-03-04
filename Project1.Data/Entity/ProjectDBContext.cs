@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Project1.Data.Entity
 {
-    public partial class Project0SQLDBContext : DbContext
+    public partial class ProjectDBContext : DbContext
     {
-        public Project0SQLDBContext()
+        public ProjectDBContext()
         {
         }
 
-        public Project0SQLDBContext(DbContextOptions<Project0SQLDBContext> options)
+        public ProjectDBContext(DbContextOptions<ProjectDBContext> options)
             : base(options)
         {
         }
@@ -33,10 +33,10 @@ namespace Project1.Data.Entity
             {
                 entity.ToTable("Customer", "Project1");
 
-                entity.HasIndex(e => e.UserId, "UQ__Customer__1788CC4DF6E8F1A5")
+                entity.HasIndex(e => e.UserId, "UQ__Customer__1788CC4D2CBE8C81")
                     .IsUnique();
 
-                entity.HasIndex(e => e.CustomerId, "UQ__Customer__A4AE64D9630CDC16")
+                entity.HasIndex(e => e.CustomerId, "UQ__Customer__A4AE64D9242A26AE")
                     .IsUnique();
 
                 entity.Property(e => e.Address).HasMaxLength(70);
@@ -74,7 +74,7 @@ namespace Project1.Data.Entity
             {
                 entity.ToTable("InventoryLine", "Project1");
 
-                entity.HasIndex(e => e.InventoryLineId, "UQ__Inventor__BF6B50E0FA7611A1")
+                entity.HasIndex(e => e.InventoryLineId, "UQ__Inventor__BF6B50E08C2DD31C")
                     .IsUnique();
 
                 entity.Property(e => e.LineTotal).HasColumnType("numeric(10, 2)");
@@ -96,7 +96,7 @@ namespace Project1.Data.Entity
             {
                 entity.ToTable("Location", "Project1");
 
-                entity.HasIndex(e => e.LocationId, "UQ__Location__E7FEA4968EE53F15")
+                entity.HasIndex(e => e.LocationId, "UQ__Location__E7FEA496D77439F8")
                     .IsUnique();
 
                 entity.Property(e => e.Address).HasMaxLength(70);
@@ -118,7 +118,7 @@ namespace Project1.Data.Entity
             {
                 entity.ToTable("Order", "Project1");
 
-                entity.HasIndex(e => e.OrderId, "UQ__Order__C3905BCE8049501B")
+                entity.HasIndex(e => e.OrderId, "UQ__Order__C3905BCE4489A4A4")
                     .IsUnique();
 
                 entity.Property(e => e.OrderTime).HasColumnType("datetime");
@@ -142,7 +142,7 @@ namespace Project1.Data.Entity
             {
                 entity.ToTable("OrderLine", "Project1");
 
-                entity.HasIndex(e => e.OrderLineId, "UQ__OrderLin__29068A119119F3F3")
+                entity.HasIndex(e => e.OrderLineId, "UQ__OrderLin__29068A11DD7CD836")
                     .IsUnique();
 
                 entity.Property(e => e.LineTotal).HasColumnType("numeric(10, 2)");
@@ -164,7 +164,7 @@ namespace Project1.Data.Entity
             {
                 entity.ToTable("Product", "Project1");
 
-                entity.HasIndex(e => e.ProductId, "UQ__Product__B40CC6CCF34E4695")
+                entity.HasIndex(e => e.ProductId, "UQ__Product__B40CC6CC1EC25997")
                     .IsUnique();
 
                 entity.Property(e => e.BestBy).HasColumnType("datetime");
@@ -180,10 +180,10 @@ namespace Project1.Data.Entity
             {
                 entity.ToTable("User", "Project1");
 
-                entity.HasIndex(e => e.UserId, "UQ__User__1788CC4D6ADC4EF1")
+                entity.HasIndex(e => e.UserId, "UQ__User__1788CC4DF79D9C59")
                     .IsUnique();
 
-                entity.HasIndex(e => e.Username, "UQ__User__536C85E4F45CD8B3")
+                entity.HasIndex(e => e.Username, "UQ__User__536C85E49D1B1B67")
                     .IsUnique();
 
                 entity.Property(e => e.Password)

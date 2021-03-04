@@ -1,14 +1,23 @@
 using System;
 using Xunit;
 
+using Project1.Library.Model;
+
 namespace Project1.Test
 {
-    public class UnitTest1
+    public class UserTest
     {
         [Fact]
-        public void Test1()
+        public void PasswordProp_Set_Valid()
         {
+            // arrange
+            User user = new User();
 
+            // act
+            user.Password = "loltesting";
+
+            // assert
+            Assert.Equal(user.Password, "loltesting");
         }
     }
 }

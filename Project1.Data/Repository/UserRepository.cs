@@ -1,42 +1,60 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
+using Project1.Data.Entity;
 using Project1.Library.Interface;
-using Project1.Library.Model;
 
 
 namespace Project1.Data.Repository
 {
     public class UserRepository : IUserRepository
     {
-        public User GetById(int id)
+        private readonly ProjectDBContext _userContext;
+
+        public UserRepository(ProjectDBContext context) 
+        {
+            _userContext = context;
+        }
+
+
+
+        public Library.Model.User Get(string username)
+        {
+            var user = _userContext.Users
+                .Select(u => u)
+                .Where(u => u.Username == username)
+                .First();
+            return new Library.Model.User
+            {
+                Username = user.Username,
+                Password = user.Password
+            };
+        }
+
+        public IEnumerable<Library.Model.User> List()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<User> List()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<User> List(Expression<Func<User, bool>> predicate)
+        public IEnumerable<Library.Model.User> List(Expression<Func<Library.Model.User, bool>> predicate)
         {
             throw new NotImplementedException();
         }
         
-        public void Add(User model)
+        public void Add(Library.Model.User model)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(User model)
+        public void Delete(Library.Model.User model)
         {
             throw new NotImplementedException();
         }
 
-        public void Edit(User model)
+        public void Edit(Library.Model.User model)
         {
             throw new NotImplementedException();
         }

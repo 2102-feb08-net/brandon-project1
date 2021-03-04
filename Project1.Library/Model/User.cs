@@ -5,7 +5,7 @@ namespace Project1.Library.Model
 {
     public class User
     {
-        public string Username { get; }
+        public string Username { get; set; }
         public string Password { get; set; }
     }
 }
