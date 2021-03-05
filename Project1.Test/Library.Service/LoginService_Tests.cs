@@ -2,8 +2,9 @@ using System;
 using Xunit;
 
 using Project1.Library.Service;
+using Project1.Test.Library.Service.Mock;
 
-namespace Project1.Test.Library.Service;
+namespace Project1.Test.Library.Service
 {
     public class LoginService_Tests
     {
