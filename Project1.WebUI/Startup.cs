@@ -17,6 +17,7 @@ using Microsoft.OpenApi.Models;
 using Project1.Data.Entity;
 using Project1.Data.Repository;
 using Project1.Library.Interface;
+using Project1.Library.Service;
 
 namespace Project1.WebUI
 {
@@ -32,7 +33,7 @@ namespace Project1.WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string connectionString = File.ReadAllText("C:/revature/project1-connection-string.txt");   //Configuration.GetConnectionString("MainDB");
+            string connectionString = Configuration.GetConnectionString("MainDB");
 
             services.AddDbContext<ProjectDBContext>(options =>
             {
@@ -40,6 +41,7 @@ namespace Project1.WebUI
             });
 
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ILoginService, LoginService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
