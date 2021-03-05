@@ -61,4 +61,4 @@ steps:
     azureSubscription: 'Azure subscription 1(11c59c44-5f11-48ed-af2b-630d4fa2affe)'
     appType: 'webApp'
     WebAppName: '2102-feb08-net-brandon-project1'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    packageForLinux: '$(Build.ArtifactStagingDirectory)/*.zip'
