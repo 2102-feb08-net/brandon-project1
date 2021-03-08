@@ -19,10 +19,20 @@ namespace Project1.Test.Library.Service
             UserService userService = new UserService(new MockUserRepository(), new MockCustomerRepository());
 
             // act
-            var result = userService.TryLogin(username, password);
+            var throwsException = false;
+            try
+            {
+                userService.TryLogin(username, password);
+            }
+            catch (ArgumentNullException e)
+            {
+                Debug.WriteLine(e);
+                throwsException = true;
+            }
+            
 
             // assert
-            Assert.False(result);
+            Assert.True(throwsException);
         }
 
 

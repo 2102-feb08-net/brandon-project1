@@ -22,6 +22,10 @@ namespace Project1.Library.Service
 
         public bool TryLogin(string username, string password)
         {
+            if (username == null || password == null)
+            {
+                throw new ArgumentNullException("Username and password must not be null." );
+            }
             User user = _userRepository.Get(username);
             
             return user != null;
