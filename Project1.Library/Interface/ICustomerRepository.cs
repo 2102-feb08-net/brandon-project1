@@ -17,5 +17,6 @@ namespace Project1.Library.Interface
         void Add(Customer model);
         void Delete(Customer model);
         void Edit(Customer model);
+        void Save();
     }
 }

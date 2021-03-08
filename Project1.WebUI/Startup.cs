@@ -41,7 +41,9 @@ namespace Project1.WebUI
             });
 
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IUserService, UserService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

@@ -1,44 +1,41 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 
-using Project1.Library.Model;
 using Project1.Library.Interface;
-
+using Project1.Library.Model;
 
 namespace Project1.Test.Library.Service.Mock
 {
-    public class MockUserRepository : IUserRepository
+    public class MockCustomerRepository : ICustomerRepository
     {
-
-        public User Get(string username)
-        {
-            return new User();
-        }
-
-        public IEnumerable<User> List()
+        public Customer GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<User> List(Expression<Func<User, bool>> predicate)
-        {
-            throw new NotImplementedException();
-        }
-        
-        public void Add(User model)
+        public IEnumerable<Customer> List()
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(User model)
+        public IEnumerable<Customer> List(Expression<Func<Customer, bool>> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public void Edit(User model)
+        public void Add(Customer model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(Customer model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Edit(Customer model)
         {
             throw new NotImplementedException();
         }
