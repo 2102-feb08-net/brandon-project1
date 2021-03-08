@@ -42,6 +42,7 @@ namespace Project1.WebUI
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<ILocationRepository, LocationRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IUserService, UserService>();
 

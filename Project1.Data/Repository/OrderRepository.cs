@@ -91,18 +91,21 @@ namespace Project1.Data.Repository
             if (model.OrderId != 0)
             {
                 s_logger.Warn($"Order to be added has an ID ({model.OrderId}) already: ignoring.");
+                return;
             }
             foreach (Library.Model.OrderLine ol in model.OrderLines)
             {
                 if (ol.OrderLineId != 0)
                 {
                     s_logger.Warn($"OrderLine to be added has an ID ({ol.OrderLineId}) already: ignoring.");
+                    return;
                 }
             }
 
             s_logger.Info($"Adding Order");
 
-            var products = _orderContext.Products;
+            var products = _orderContext.Products
+                .AsNoTracking();
 
             // ID left at default 0
             Order entity = new Order
@@ -119,7 +122,7 @@ namespace Project1.Data.Repository
                 OrderLine entity2 = new OrderLine
                 {
                     Order = entity,
-                    Product = products.First(p => p.ProductId == ol.ProductId),
+                    ProductId = ol.ProductId,
                     Quantity = ol.Quantity,
                     LineTotal = ol.Quantity * products.First(p => p.ProductId == ol.ProductId).UnitPrice
                 };

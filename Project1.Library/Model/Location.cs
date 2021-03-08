@@ -1,4 +1,7 @@
 
+using System;
+using System.Collections.Generic;
+
 
 
 namespace Project1.Library.Model
@@ -13,5 +16,7 @@ namespace Project1.Library.Model
         public string Country { get; set; }
         public string PostalCode { get; set; }
         public string Phone { get; set; }
+
+        public List<InventoryLine> Inventory { get; set; }
     }
 }

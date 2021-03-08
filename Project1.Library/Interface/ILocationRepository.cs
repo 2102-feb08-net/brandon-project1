@@ -17,5 +17,6 @@ namespace Project1.Library.Interface
         void Add(Location model);
         void Delete(Location model);
         void Edit(Location model);
+        void Save();
     }
 }
