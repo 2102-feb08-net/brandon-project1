@@ -35,7 +35,7 @@ namespace Project1.WebUI.Controllers
 
         // Receive order creation request with order details argument
         [HttpPost("api/order/create")]
-        public void Create(Order order, string option)
+        public void Create(Order order)
         {
             // check and update location inventory
             var location = _locationRepository.GetById(order.LocationId);
@@ -79,18 +79,28 @@ namespace Project1.WebUI.Controllers
             return _orderRepository.Get(orderId);
         }
 
-        // Receive customer order history request with customer id argument
-        [HttpGet("api/order/customerhistory")]
-        public List<Order> UserHistory(int customerId)
+        // Receive order history request with customer id or location id argument
+        [HttpGet("api/order/history")]
+        public IActionResult History(int? locationId, int? customerId)
         {
-            throw new NotImplementedException();
+            if (locationId != null && customerId == null)
+            {
+                return Ok(_orderRepository.List()
+                    .Where(o => o.LocationId == locationId));
+            }
+            else if (customerId != null && locationId == null)
+            {
+                return Ok(_orderRepository.List()
+                    .Where(o => o.CustomerId == customerId));
+            }
+            else if (locationId != null && customerId != null)
+            {
+                return Ok(_orderRepository.List()
+                    .Where(o => o.LocationId == locationId && o.CustomerId == customerId));
+            }
+
+            return BadRequest();
         }
 
-        // Receive location order history request with location id argument
-        [HttpGet("api/order/locationhistory")]
-        public List<Order> LocationHistory(int locationId)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

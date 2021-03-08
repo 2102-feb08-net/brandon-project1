@@ -54,6 +54,7 @@ namespace Project1.Data.Repository
                     {
                         OrderLineId = ol.OrderLineId,
                         OrderId = ol.OrderId,
+                        ProductId = ol.ProductId,
                         Product = new Library.Model.Product
                         {
                             ProductId = ol.Product.ProductId,
@@ -75,12 +76,46 @@ namespace Project1.Data.Repository
 
         public IEnumerable<Library.Model.Order> List()
         {
-            throw new NotImplementedException();
+            return List(null);
         }
 
         public IEnumerable<Library.Model.Order> List(Expression<Func<Library.Model.Order, bool>> predicate)
         {
-            throw new NotImplementedException();
+            IQueryable<Order> items = _orderContext.Orders
+                .Include(o => o.OrderLines)
+                    .ThenInclude(ol => ol.Product)
+                    .AsNoTracking();
+            
+            // Figure out this predicate thing later
+
+            // if (search != null)
+            // {
+            //     items = items.Where(c => (c.FirstName + " " + c.LastName).Contains(search));
+            // }
+
+            return items.Select(order => new Library.Model.Order
+            {
+                OrderId = order.OrderId,
+                CustomerId = order.CustomerId,
+                LocationId = order.LocationId,
+                OrderTime = order.OrderTime,
+                OrderTotal = order.OrderTotal,
+
+                OrderLines = order.OrderLines.Select(ol => new Library.Model.OrderLine
+                {
+                    OrderLineId = ol.OrderLineId,
+                    OrderId = ol.OrderId,
+                    ProductId = ol.ProductId,
+                    Product = new Library.Model.Product
+                    {
+                        ProductId = ol.Product.ProductId,
+                        Name = ol.Product.Name,
+                        BestBy = ol.Product.BestBy,
+                        UnitPrice = ol.Product.UnitPrice
+                    },
+                    Quantity = ol.Quantity
+                }).ToList()
+            });
         }
 
         /// <summary>
