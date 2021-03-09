@@ -25,7 +25,30 @@ namespace Project1.Data.Repository
 
         public Library.Model.Customer GetById(int id)
         {
-            throw new NotImplementedException();
+            try {
+                var customer = _customerContext.Customers
+                    .First(u => u.CustomerId == id);
+
+                return new Library.Model.Customer
+                {
+                    CustomerId = customer.CustomerId,
+                    FirstName = customer.FirstName,
+                    LastName = customer.LastName,
+                    Address = customer.Address,
+                    City = customer.City,
+                    State = customer.State,
+                    Country = customer.Country,
+                    PostalCode = customer.PostalCode,
+                    Phone = customer.Phone,
+                    Email = customer.Email
+                };
+            }
+            catch (InvalidOperationException e)
+            {
+                s_logger.Debug(e.Message, e);
+            }
+            
+            return null;
         }
 
         public IEnumerable<Library.Model.Customer> List()
