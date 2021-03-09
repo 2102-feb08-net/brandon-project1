@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="index.css" />
 </head>
 <body>
     <header>
@@ -14,13 +15,28 @@
     </header>
 
     <main>
-        <h1>User Login</h1>
+        <h1 id="page-title">Golly G General Stores Master Control Program - Web Interface</h1>
 
-        <div id="user-display" hidden>
-            
+        <div id="user-login">
+            <h2>Authorized User Login</h2>
+            <form id="user-login-form">
+                <label>Username</label>
+                <input type="text" name="username"/><br>
+                <label>Password</label>
+                <input type="text" name="password"/><br>
+                <input type="submit" value="Login"/>
+            </form>
+            <div id="login-error" hidden></div>
         </div>
 
-        <div id="error-message" hidden></div>
+        <div id="menu" hidden>
+            <h2>Create Customer</h2>
+            <h2>Search Customers</h2>
+            <h2>Create Order</h2>
+            <h2>Search Orders</h2>
+        </div>
+
+        
     </main>
 
     <script src="main.js"></script>

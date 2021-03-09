@@ -63,25 +63,40 @@ namespace Project1.WebUI.Controllers
 
         // Receive user login request with username and password arguments
         [HttpGet("api/user/login")]
-        public bool Login(string username, string password)
+        public IActionResult Login(string username, string password)
         {
-            return _userService.TryLogin(username, password);
+            try{
+                if (_userService.TryLogin(username, password))
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return NotFound("password invalid");
+                }
+            }
+            catch (InvalidOperationException e)
+            {
+                s_logger.Debug(e.Message, e);
+            }
+            
+            return NotFound("username invalid");
         }
 
         // Receive user details request with username argument
         [HttpGet("api/user/details")]
-        public Customer Details(string username)
+        public IActionResult Details(string username)
         {
             try
             {
-                return _userService.GetUserDetails(username);
+                return Ok(_userService.GetUserDetails(username));
             }
             catch (ArgumentException e)
             {
                 s_logger.Debug(e.Message, e);
             }
             
-            return null;
+            return BadRequest();
         }
 
 

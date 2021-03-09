@@ -1,0 +1,24 @@
+body {
+    background-color: #1a2929;
+    color: #568356;
+}
+
+#page-title {
+    text-align: center;
+}
+
+#user-login {
+    margin: auto;
+    width: 20%;
+    border: 3px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+#menu {
+    margin: auto;
+    width: 30%;
+    border: 3px solid black;
+    padding: 10px;
+    text-align: center;
+}

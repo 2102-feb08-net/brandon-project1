@@ -28,7 +28,7 @@ namespace Project1.Library.Service
             }
             User user = _userRepository.Get(username);
             
-            return user != null;
+            return user.Password == password;
         }
 
         public Customer GetUserDetails(string username)

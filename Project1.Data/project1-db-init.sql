@@ -1,6 +1,5 @@
 
 
-
 DROP TABLE Project1.[InventoryLine], Project1.[OrderLine], Project1.[Order], Project1.[Customer], Project1.[Product], Project1.[Location], Project1.[User]
 DROP SCHEMA Project1
 GO

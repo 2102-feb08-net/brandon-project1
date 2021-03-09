@@ -35,7 +35,7 @@ namespace Project1.WebUI.Controllers
 
         // Receive order creation request with order details argument
         [HttpPost("api/order/create")]
-        public void Create(Order order)
+        public IActionResult Create(Order order)
         {
             // check and update location inventory
             var location = _locationRepository.GetById(order.LocationId);
@@ -48,13 +48,13 @@ namespace Project1.WebUI.Controllers
                     if (inventoryLine.Quantity < ol.Quantity)
                     {
                         s_logger.Warn($"Order to be added cannot be fullfilled by location ({order.LocationId}): ignoring.");
-                        return;
+                        return BadRequest();
                     }
                 }
                 catch (InvalidOperationException e)
                 {
                     s_logger.Warn(e.Message, e);
-                    return;
+                    return BadRequest();
                 }
             }
             foreach(OrderLine ol in order.OrderLines)
@@ -70,6 +70,8 @@ namespace Project1.WebUI.Controllers
             // save DB changes
             _locationRepository.Save();
             _orderRepository.Save();
+
+            return Ok();
         }
 
         // Receive orders details request with order id argument
@@ -83,6 +85,7 @@ namespace Project1.WebUI.Controllers
         [HttpGet("api/order/history")]
         public IActionResult History(int? locationId, int? customerId)
         {
+            Console.WriteLine(locationId + ", " + customerId);
             if (locationId != null && customerId == null)
             {
                 return Ok(_orderRepository.List()

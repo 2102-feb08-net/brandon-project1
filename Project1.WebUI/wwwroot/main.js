@@ -22,10 +22,13 @@ function checkUser(username) {
 // route configured with attributes (/api/user/login)
 function loginUser(username, password) {
   return fetch(`api/user/login?username=${username}&password=${password}`).then(response => {
+    if (response.status == 404) {
+      throw new Error(`Username or password was invalid.`);
+    }
     if (!response.ok) {
       throw new Error(`Network response was not ok (${response.status})`);
     }
-    return response.json();
+    return true;
   });
 }
 
@@ -100,23 +103,23 @@ function loadOrderDetails(orderId) {
 
 // send a request that will be handled by OrderController.Create based on the
 // route data configured in the body (/api/order/create)
-function createOrder(order, orderLines) {
-  if (orderLines.length <= 0)
+function createOrder(orderIn, orderLinesIn) {
+  if (orderLinesIn.length <= 0)
   {
     throw new Error(`Attempt to create Order with no OrderLines`);
   }
   const lines = [];
-  for (let i = 0; i < orderLines.length; ) {
+  for (let i = 0; i < orderLinesIn.length; i++) {
     lines[i] = {
-      ProductId = orderLines[i].ProductId,
-      Quantity = orderLines[i].Quantity
-    }
+      ProductId: orderLinesIn[i].ProductId,
+      Quantity: orderLinesIn[i].Quantity
+    };
   }
   const order = {
-    CustomerId = order.CustomerId,
-    LocationId = order.LocationId,
-    OrderTime = order.OrderTime,
-    OrderLines = lines
+    CustomerId: orderIn.CustomerId,
+    LocationId: orderIn.LocationId,
+    OrderTime: orderIn.OrderTime,
+    OrderLines: lines
   }
 
   return fetch(`api/order/create`, {
@@ -129,5 +132,18 @@ function createOrder(order, orderLines) {
     if (!response.ok) {
       throw new Error(`Network response was not ok (${response.status})`);
     }
+    return response;
   });
+}
+
+
+// send a request that will be handled by OrderController.History based on the
+// route configured with attributes (/api/order/history)
+function loadOrderHistory(locationId, customerId) {
+  return fetch(`api/order/history?locationId=${locationId}&customerId=${customerId}`).then(response => {
+      if (!response.ok) {
+        throw new Error(`Network response was not ok (${response.status})`);
+      }
+      return response.json();
+    })
 }
