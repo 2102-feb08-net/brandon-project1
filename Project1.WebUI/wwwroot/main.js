@@ -35,28 +35,31 @@ function loginUser(username, password) {
 
 // send a request that will be handled by UserController.Details based on
 // route configured with attributes (/api/user/details)
-function loadUserDetails() {
-  let username = sessionStorage.getItem("username")
-  if (username != null)
-  {
-    return fetch(`api/user/details?username=${username}`).then(response => {
-      if (!response.ok) {
-        throw new Error(`Network response was not ok (${response.status})`);
-      }
-      return response.json();
-    });
-  }
+function loadCustomerDetails(customerId) {
+  return fetch(`api/user/details?customerId=${customerId}`).then(response => {
+    if (!response.ok) {
+      throw new Error(`Network response was not ok (${response.status})`);
+    }
+    return response.json();
+  });
+}
+
+
+function loadCustomerList() {
+  return fetch('api/user/customerlist').then(response => {
+    console.info(response);
+    if (!response.ok) {
+      throw new Error(`Network response was not ok (${response.status})`);
+    }
+    return response.json();
+  })
 }
 
 
 // send a request that will be handled by UserController.Create based on the
 // route configured with attributes and in the body (/api/user/create)
-function createUser(username, password, details) {
-  const user = {
-    Username: username,
-    Password: password
-  };
-  const customer = {
+function createUser(details) {
+  let customer = {
     FirstName: details.FirstName,
     LastName: details.LastName,
     Address: details.Address,
@@ -68,16 +71,17 @@ function createUser(username, password, details) {
     Email: details.Email
   }
   
-  return fetch(`api/user/create?username=${username}&password=${password}`, {
+  return fetch(`api/user/create`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: concat(JSON.stringify(customer))
+    body: JSON.stringify(customer)
   }).then(response => {
     if (!response.ok) {
       throw new Error(`Network response was not ok (${response.status})`);
     }
+    return true;
   });
 }
 
@@ -108,14 +112,14 @@ function createOrder(orderIn, orderLinesIn) {
   {
     throw new Error(`Attempt to create Order with no OrderLines`);
   }
-  const lines = [];
+  let lines = [];
   for (let i = 0; i < orderLinesIn.length; i++) {
     lines[i] = {
       ProductId: orderLinesIn[i].ProductId,
       Quantity: orderLinesIn[i].Quantity
     };
   }
-  const order = {
+  let order = {
     CustomerId: orderIn.CustomerId,
     LocationId: orderIn.LocationId,
     OrderTime: orderIn.OrderTime,

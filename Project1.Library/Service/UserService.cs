@@ -31,20 +31,14 @@ namespace Project1.Library.Service
             return user.Password == password;
         }
 
-        public Customer GetUserDetails(string username)
+        public IEnumerable<Customer> GetCustomerList()
         {
-            if (username == null)
-            {
-                throw new ArgumentNullException("Username must not be null");
-            }
+            return _customerRepository.List();
+        }
 
-            var user = _userRepository.Get(username);
-            if (user == null)
-            {
-                throw new ArgumentException("User with username " + username + " not found.");
-            }
-            var customer = _customerRepository.List()
-                .First(c => c.UserId == user.UserId);
+        public Customer GetCustomerDetails(int customerId)
+        {
+            var customer = _customerRepository.GetById(customerId);
             return customer;
         }
 

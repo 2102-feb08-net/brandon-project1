@@ -1,5 +1,6 @@
 
 
+
 DROP TABLE Project1.[InventoryLine], Project1.[OrderLine], Project1.[Order], Project1.[Customer], Project1.[Product], Project1.[Location], Project1.[User]
 DROP SCHEMA Project1
 GO
@@ -20,6 +21,20 @@ CREATE TABLE Project1.[User] (
     CONSTRAINT PK_User PRIMARY KEY (UserId)
 )
 
+CREATE TABLE Project1.[Customer] (
+    CustomerId INT NOT NULL IDENTITY UNIQUE,
+    FirstName NVARCHAR(40) NOT NULL,
+    LastName NVARCHAR(20) NOT NULL,
+    Address NVARCHAR(70),
+    City NVARCHAR(40),
+    State NVARCHAR(40),
+    Country NVARCHAR(40),
+    PostalCode NVARCHAR(10),
+    Phone NVARCHAR(24),
+    Email NVARCHAR(60) NOT NULL,
+    CONSTRAINT PK_Customer PRIMARY KEY (CustomerId)
+)
+
 CREATE TABLE Project1.[Location] (
     LocationId INT NOT NULL IDENTITY UNIQUE,
     StoreNumber INT NOT NULL,
@@ -38,24 +53,6 @@ CREATE TABLE Project1.[Product] (
     BestBy DATETIME,
     UnitPrice NUMERIC(10, 2) NOT NULL,
     CONSTRAINT PK_Product PRIMARY KEY (ProductId)
-)
-
-
-
-CREATE TABLE Project1.[Customer] (
-    CustomerId INT NOT NULL IDENTITY UNIQUE,
-    UserId INT NOT NULL UNIQUE,
-    FirstName NVARCHAR(40) NOT NULL,
-    LastName NVARCHAR(20) NOT NULL,
-    Address NVARCHAR(70),
-    City NVARCHAR(40),
-    State NVARCHAR(40),
-    Country NVARCHAR(40),
-    PostalCode NVARCHAR(10),
-    Phone NVARCHAR(24),
-    Email NVARCHAR(60) NOT NULL,
-    CONSTRAINT PK_Customer PRIMARY KEY (CustomerId),
-    CONSTRAINT FK_Customer_User FOREIGN KEY (UserId) REFERENCES Project1.[User]
 )
 
 
@@ -102,11 +99,14 @@ CREATE TABLE Project1.[InventoryLine] (
 ********************************************************************************/
 
 INSERT INTO Project1.[User] (Username, Password) VALUES
-    ('llister', 'llister'),
-    ('kavalos', 'kavalos'),
-    ('rfry',    'rfry'),
-    ('ibailey', 'ibailey'),
-    ('edrew',   'edrew');
+    ('admin', 'admin');
+
+INSERT INTO Project1.[Customer] (FirstName, LastName, Address, City, State, Country, PostalCode, Phone, Email) VALUES
+    ('Lauren', 'Lister', '101 Alpha Way',    'Fantasy Heights', NULL, 'Hypothetican Republic', NULL, NULL, 'llister@emailhost.net'),
+    ('Kaiser', 'Avalos', '258 Omega Blvd.',  'Mythopolis',      NULL, 'Hypothetican Republic', NULL, NULL, 'kavalos@emailhost.net'),
+    ('Rianne', 'Fry',    '741 Tango Ave.',   'New Simula',      NULL, 'Hypothetican Republic', NULL, NULL, 'rfry@emailhost.net'),
+    ('Isaac', 'Bailey',  '121 Alpha Way',    'New Simula',      NULL, 'Hypothetican Republic', NULL, NULL, 'ibailey@emailhost.net'),
+    ('Enzo', 'Drew',     '369 Delta Dr.',    'Fantasy Heights', NULL, 'Hypothetican Republic', NULL, NULL, 'edrew@emailhost.net');
 
 INSERT INTO Project1.[Location] (StoreNumber, Address, City, State, Country, PostalCode, Phone) VALUES
     (1,   '123 1st Street', 'Mythopolis',       NULL, 'Hypothetican Republic', NULL, '202-555-0128'),
@@ -124,12 +124,7 @@ INSERT INTO Project1.[Product] (Name, BestBy, UnitPrice) VALUES
     ('Swiss Cheese, 1 lb', '2021/5/16', 2.49),
     ('Turkey, Whole', '2021/4/1', 19.99);
 
-INSERT INTO Project1.[Customer] (UserId, FirstName, LastName, Address, City, State, Country, PostalCode, Phone, Email) VALUES
-    (1, 'Lauren', 'Lister', '101 Alpha Way',    'Fantasy Heights', NULL, 'Hypothetican Republic', NULL, NULL, 'llister@emailhost.net'),
-    (2, 'Kaiser', 'Avalos', '258 Omega Blvd.',  'Mythopolis',      NULL, 'Hypothetican Republic', NULL, NULL, 'kavalos@emailhost.net'),
-    (3, 'Rianne', 'Fry',    '741 Tango Ave.',   'New Simula',      NULL, 'Hypothetican Republic', NULL, NULL, 'rfry@emailhost.net'),
-    (4, 'Isaac', 'Bailey',  '121 Alpha Way',    'New Simula',      NULL, 'Hypothetican Republic', NULL, NULL, 'ibailey@emailhost.net'),
-    (5, 'Enzo', 'Drew',     '369 Delta Dr.',    'Fantasy Heights', NULL, 'Hypothetican Republic', NULL, NULL, 'edrew@emailhost.net');
+
 
 INSERT INTO Project1.[Order] (CustomerId, LocationId, OrderTime, OrderTotal) VALUES
     (1, 2, '2021/2/21', 3.98),

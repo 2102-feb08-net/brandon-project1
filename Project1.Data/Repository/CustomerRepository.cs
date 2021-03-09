@@ -47,7 +47,6 @@ namespace Project1.Data.Repository
             return items.Select(c => new Library.Model.Customer
             {
                 CustomerId = c.CustomerId,
-                UserId = c.UserId,
                 FirstName = c.FirstName,
                 LastName = c.LastName,
                 Address = c.Address,
@@ -75,7 +74,6 @@ namespace Project1.Data.Repository
             // ID left at default 0
             Customer entity = new Customer
             {
-                UserId = model.UserId,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Address = model.Address,

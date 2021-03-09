@@ -33,25 +33,11 @@ namespace Project1.WebUI.Controllers
 
 
 
-        // Receive user creation request with username, password, and details arguments
+        // Receive customer creation request with details argument
         [HttpPost("api/user/create")]
-        public void Create(string username, string password, [FromBodyAttribute] Customer customer)
+        public void Create([FromBodyAttribute] Customer customer)
         {
-            if (Check(username) == false)
-            {
-                var user = new Library.Model.User{
-                    Username = username,
-                    Password = password
-                };
-                _userRepository.Add(user);
-                _userRepository.Save();
-                customer.UserId = _userRepository.Get(username).UserId;;
-                _userService.SetUserDetails(customer);
-            }
-            else
-            {
-                Console.WriteLine("User with this username already exists");
-            }
+            _userService.SetUserDetails(customer);
         }
 
         // Receive user existence check request with username argument
@@ -85,11 +71,11 @@ namespace Project1.WebUI.Controllers
 
         // Receive user details request with username argument
         [HttpGet("api/user/details")]
-        public IActionResult Details(string username)
+        public IActionResult Details(int id)
         {
             try
             {
-                return Ok(_userService.GetUserDetails(username));
+                return Ok(_userService.GetCustomerDetails(id));
             }
             catch (ArgumentException e)
             {
@@ -99,6 +85,19 @@ namespace Project1.WebUI.Controllers
             return BadRequest();
         }
 
+        [HttpGet("api/user/customerlist")]
+        public IEnumerable<Customer> CustomerList()
+        {
+            try
+            {
+                return _userService.GetCustomerList();
+            }
+            catch (InvalidOperationException e)
+            {
+                s_logger.Debug(e.Message, e);
+            }
 
+            return null;
+        }
     }
 }
