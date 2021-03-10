@@ -37,26 +37,26 @@ namespace Project1.Test.Library.Service
 
 
 
-        [Fact]
-        public void GetUserDetails_UsernameNull_ThrowException()
-        {
-            // arrange
-            UserService userService = new UserService(new MockUserRepository(), new MockCustomerRepository());
+        // [Fact]
+        // public void GetUserDetails_UsernameNull_ThrowException()
+        // {
+        //     // arrange
+        //     UserService userService = new UserService(new MockUserRepository(), new MockCustomerRepository());
 
-            // act
-            var throwsException = false;
-            try
-            {
-                userService.GetUserDetails(null);
-            }
-            catch (ArgumentException e)
-            {
-                Debug.WriteLine(e);
-                throwsException = true;
-            }
+        //     // act
+        //     var throwsException = false;
+        //     try
+        //     {
+        //         userService.GetUserDetails(null);
+        //     }
+        //     catch (ArgumentException e)
+        //     {
+        //         Debug.WriteLine(e);
+        //         throwsException = true;
+        //     }
 
-            // assert
-            Assert.True(throwsException);
-        }
+        //     // assert
+        //     Assert.True(throwsException);
+        // }
     }
 }

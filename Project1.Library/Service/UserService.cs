@@ -24,7 +24,7 @@ namespace Project1.Library.Service
         {
             if (username == null || password == null)
             {
-                throw new ArgumentNullException("Username and password must not be null." );
+                throw new ArgumentNullException();
             }
             User user = _userRepository.Get(username);
             
