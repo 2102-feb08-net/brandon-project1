@@ -26,3 +26,8 @@ body {
 .menu-button {
     text-decoration: underline;
 }
+
+#create-customer-form > label {
+    align-items: left;
+}
+
