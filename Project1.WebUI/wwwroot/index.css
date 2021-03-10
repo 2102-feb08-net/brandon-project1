@@ -27,7 +27,18 @@ body {
     text-decoration: underline;
 }
 
-#create-customer-form > label {
-    align-items: left;
+.menu-label {
+    display: inline-block;
+    /*float: left;*/
+    clear: left;
+    width: 250px;
+    text-align: center;
 }
 
+.menu-input {
+    display: inline-block;
+    /*float: left;*/
+    clear: left;
+    width: 250px;
+    text-align: center;
+}
