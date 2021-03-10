@@ -26,3 +26,19 @@ body {
 .menu-button {
     text-decoration: underline;
 }
+
+.menu-label {
+    display: inline-block;
+    /*float: left;*/
+    clear: left;
+    width: 250px;
+    text-align: center;
+}
+
+.menu-input {
+    display: inline-block;
+    /*float: left;*/
+    clear: left;
+    width: 250px;
+    text-align: center;
+}
